@@ -1,0 +1,79 @@
+  <!DOCTYPE html>
+  <!-- Coding By CodingNepal - codingnepalweb.com -->
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Login</title>
+    <!---Custom CSS File--->
+    <link rel="stylesheet" href="userStyle.css">
+  </head>
+  <body>
+    <div class="container">
+      <input type="checkbox" id="check">
+      <div class="login form">
+        <header>Admin Login</header>
+        <form action="/admin" method="post" id="loginForm">
+          <input type="hidden" id="msg" name="msg" value="<%= msg %>">
+          <input type="email" placeholder="Enter your email" name="email" id="email">
+          <input type="password" placeholder="Enter your password" name="password" id="password">
+          <input type="submit" class="button" value="Login">
+        </form>
+        <div class="signup">
+          <span class="signup">
+          <a href="/" class="button">User Login</a>
+          </span>
+          
+        </div>
+      </div>
+    
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+
+    const msg = document.getElementById('msg').value;
+
+    if(msg){
+      Swal.fire(msg);
+    }
+
+
+      const loginForm = document.getElementById('loginForm');
+
+      loginForm.addEventListener('submit',function(event){
+        event.preventDefault();
+        const email  = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if(!email || !password){
+          Swal.fire({
+            icon:'error',
+            title:'oops..',
+            text:'All fields are required'
+          })
+          return;
+        }
+
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if(!emailPattern.test(email)){
+          Swal.fire({
+            icnon:'error',
+            title:'Invalid Email',
+            text:'Enter Valid Email'
+          })
+          return;
+        }
+
+
+        loginForm.submit();
+
+      })
+
+      
+    </script>
+
+  </body>
+  </html>

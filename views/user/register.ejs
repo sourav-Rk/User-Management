@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login & Registration Form</title>
+  <!---Custom CSS File--->
+  <link rel="stylesheet" href="userStyle.css">
+</head>
+<body>
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Registration</header>
+      
+      <form action="/register" method="post" id="signupForm">
+        <input type="hidden" id="msg" value="<%= msg %>" name="msg">
+        <input type="text" placeholder="Enter your Name" name="name" id="name" autocomplete="off">
+        <input type="email" placeholder="Enter your email" name="email" id="email" autocomplete="off">
+        <input type="text" placeholder="Enter your Mobile" name="mobile" id="mobile" autocomplete="off">
+        <input type="password" placeholder="Enter your password" name="password" id="password" >
+        <input type="submit" class="button" value="Register" id="signupButton">
+      </form>
+      <div class="signup">
+        <span class="signup"> Have an account?
+         <a href="/" class="button">Login</a>
+        </span>
+      </div>
+    </div>
+
+  </div>
+   
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+   <script>
+    const msg = document.getElementById('msg').value;
+    
+    if(msg){
+        Swal.fire({
+           icon:'success',
+            title:msg
+        })
+    }
+   
+    const signupForm = document.getElementById('signupForm');
+
+    signupForm.addEventListener('submit',function(event){
+        event.preventDefault();
+       const name = document.getElementById('name').value.trim();
+       const email = document.getElementById('email').value.trim();
+       const mobile = document.getElementById('mobile').value.trim();
+       const password = document.getElementById('password').value.trim();
+   
+
+    if(!name || !email || !mobile || !password){
+      Swal.fire({
+        icon:'error',
+        title:'oops..',
+        text:'All fields are required!'
+      });
+      return;
+    }
+
+    const namePattern=/^[a-zA-Z]+$/
+    if(!namePattern.test(name) || name.length<2 || name.length>50){
+      Swal.fire({
+        icon:"error",
+        title:"invalid name",
+        text:"Enter a valid name"
+      })
+      return
+    }
+     
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if(!emailPattern.test(email)){
+      Swal.fire({
+          icon:'error',
+          title:'Invalid email',
+          text:'Enter valid Email'
+      });
+
+      return ;
+    }
+
+    const mobilePattern = /^[0-9]{10}$/;
+    if(!mobilePattern.test(mobile)){
+      Swal.fire({
+        icon:'error',
+        title:'Invalid Mobile Number'
+      })
+      return;
+    }
+    
+    signupForm.submit();
+    
+  });
+
+   </script>
+
+</body>
+</html>
