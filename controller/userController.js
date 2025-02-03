@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 
                                                    
-//hashing password function----
+//hashing password function // sourav commit changes
 const securePassword = async(password)=>{
     try{
         const saltround = 10;
